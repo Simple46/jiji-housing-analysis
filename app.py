@@ -66,6 +66,22 @@ if filtered_df.empty:
         "⚠️ No data matches the selected filters. Please adjust your filters in the sidebar.")
     st.stop()
 
+# Function to format pricr
+
+
+def format_price(price):
+    if price >= 1_000_000_000:
+        return f"₦{price / 1_000_000_000:g}B"
+
+    elif price >= 1_000_000:
+        return f"₦{price / 1_000_000:g}M"
+
+    elif price >= 1_000:
+        return f"₦{price / 1_000:g}K"
+
+    else:
+        return f"₦{price:,.0f}"
+
 # ==========================================
 # KPI SECTION (TASK 4 REQUIREMENT)
 # ==========================================
@@ -79,7 +95,10 @@ furnished_count = len(filtered_df[filtered_df['Furnishing'] == 'Furnished'])
 pct_furnished = (furnished_count / total_listings) * 100
 
 col1.metric("Total House Listings", f"{total_listings:,}")
-col2.metric("Average House Price", f"₦{avg_price:,.0f}")
+col2.metric(
+    "Average House Price",
+    format_price(avg_price)
+)
 col3.metric("Most Frequent Region", most_common_region)
 col4.metric("% Furnished Houses", f"{pct_furnished:.1f}%")
 
