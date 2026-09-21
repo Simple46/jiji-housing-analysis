@@ -10,7 +10,7 @@ st.set_page_config(page_title="Jiji Housing Market Analysis", layout="wide")
 # Load data
 
 
-@st.cache_data
+# @st.cache_data
 def load_data():
     return pd.read_csv('jiji_housing_cleaned.csv')
 
@@ -37,8 +37,8 @@ selected_furnishings = st.sidebar.multiselect(
     "Select Furnishing Type(s):", furnishings, default=furnishings)
 selected_bedrooms = st.sidebar.multiselect(
     "Select Number of Bedrooms:", bedrooms, default=bedrooms)
-selected_boosts = st.sidebar.multiselect(
-    "Select Listing Type (Boost):", boosts, default=boosts)
+# selected_boosts = st.sidebar.multiselect(
+#     "Select Listing Type (Boost):", boosts, default=boosts)
 
 # Add a reset button
 if st.sidebar.button("🔄 Reset Filters to Default"):
@@ -48,8 +48,8 @@ if st.sidebar.button("🔄 Reset Filters to Default"):
 filtered_df = df[
     (df['Region Parent Name'].isin(selected_states)) &
     (df['Furnishing'].isin(selected_furnishings)) &
-    (df['Bedrooms'].isin(selected_bedrooms)) &
-    (df['Is Boosted'].isin(selected_boosts))
+    (df['Bedrooms'].isin(selected_bedrooms))
+    # (df['Is Boosted'].isin(selected_boosts))
 ]
 
 # ==========================================
